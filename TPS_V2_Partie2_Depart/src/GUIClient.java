@@ -88,15 +88,45 @@ public class GUIClient extends ChatClient {
                  à la connexion (nom d'utilisateur, adresse du serveur, port de l'application).
                Fiez-vous aux captures d'écran pour voir le résultat attendu.
             */
+            JPanel panel = new JPanel();
+            panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+            JPanel userPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+            JLabel userLabel = new JLabel("USERNAME :");
+            JTextField userTextField = new JTextField(15);
+            userLabel.setHorizontalAlignment(JTextField.CENTER);
+            userPanel.add(userLabel);
+            userPanel.add(userTextField);
+            panel.add(userPanel);
+
+            // Serveur
+            JPanel serverPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+            JLabel serverLabel = new JLabel("SERVER:");
+            JTextField serverTextField = new JTextField(15);
+            serverTextField.setHorizontalAlignment(JTextField.CENTER);
+            serverPanel.add(serverLabel);
+            serverPanel.add(serverTextField);
+            panel.add(serverPanel);
+
+            // Port
+            JPanel portPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+            JLabel portLabel = new JLabel("PORT:");
+            JTextField portTextField = new JTextField(15);
+            serverTextField.setHorizontalAlignment(JTextField.CENTER);
+            portPanel.add(portLabel);
+            portPanel.add(portTextField);
+            panel.add(portPanel);
 
             JButton connectButton = new JButton("Rejoindre");
             connectButton.addActionListener(e -> {
                 this.setVisible(false);
                 // Décommentez les lignes suivantes une fois le TODO 10 complété:
-                //userName = userField.getText();
-                //connecter(hostAddr.getText(), Integer.parseInt(hostPort.getText()));
+                // userName = userTextArea.getText();
+                // connecter(serverTextArea.getText(), Integer.parseInt(portTextArea.getText()));
             });
+
             this.add(connectButton, BorderLayout.SOUTH);
+            this.add(panel);
             this.getRootPane().setDefaultButton(connectButton);
         }
     }
