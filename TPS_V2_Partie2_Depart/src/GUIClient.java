@@ -61,6 +61,50 @@ public class GUIClient extends ChatClient {
           Fiez-vous aux captures d'écran pour voir le résultat attendu.
         */
 
+        JMenu fichierMenu = new JMenu("Fichier");
+
+        // Option Se connecter
+        JMenuItem seConnecterItem = new JMenuItem("Se connecter");
+        seConnecterItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                connecter();
+            }
+        });
+        fichierMenu.add(seConnecterItem);
+
+        JMenuItem quitterItem = new JMenuItem("Quitter");
+        quitterItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        fichierMenu.add(quitterItem);
+
+        JMenu historiqueMenu = new JMenu("Historique");
+
+        JMenuItem importerItem = new JMenuItem("Importer");
+        importerItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                chargerHistorique(); // Appeler la méthode pour charger l'historique
+            }
+        });
+        historiqueMenu.add(importerItem);
+
+        JMenuItem exporterItem = new JMenuItem("Exporter");
+        exporterItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sauvegarderHistorique(); // Appeler la méthode pour sauvegarder l'historique
+            }
+        });
+        historiqueMenu.add(exporterItem);
+
+        menuBar.add(fichierMenu);
+        menuBar.add(historiqueMenu);
+
         return menuBar;
     }
 
@@ -121,8 +165,8 @@ public class GUIClient extends ChatClient {
             connectButton.addActionListener(e -> {
                 this.setVisible(false);
                 // Décommentez les lignes suivantes une fois le TODO 10 complété:
-                // userName = userTextArea.getText();
-                // connecter(serverTextArea.getText(), Integer.parseInt(portTextArea.getText()));
+                userName = userTextField.getText();
+                 connecter(serverTextField.getText(), Integer.parseInt(portTextField.getText()));
             });
 
             this.add(connectButton, BorderLayout.SOUTH);
