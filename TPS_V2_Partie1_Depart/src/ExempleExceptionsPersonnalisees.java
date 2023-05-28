@@ -18,7 +18,10 @@ class ExempleExceptionsPersonnalisees {
         // Logique de l'opération
     }
 
-    public void setValeur(int valeur) {
-        this.valeur = valeur;
+    public void setValeur(int valeur) throws ValeurHorsLimiteException {
+        if (valeur > 100 || valeur < 1) {
+            throw new ValeurHorsLimiteException("La valeur dépasse la limite maximale.");
+        }
     }
 }
+

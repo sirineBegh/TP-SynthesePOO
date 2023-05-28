@@ -1,0 +1,13 @@
+serveur: Bonjour Bob!
+serveur: # Bob s'est connecté (3 utilisateurs en ligne)
+salut!
+Alice: hey ca va?
+pas pire, je suis en train de faire le TP de prog
+@Alice c'est tellement looonnnnng
+@Bob Alice: Ahah je sais 😓
+admin: Hey tu devrais pas être ici alors! Vas finir ton TP!
+Alice: Oh snap, c'est l'admin! Run!
+Alice: bye!
+serveur: # Alice s'est deconnecté (2 utilisateurs restants)
+j'y vais moi aussi, ciao
+serveur: bye!
