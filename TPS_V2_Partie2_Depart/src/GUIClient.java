@@ -38,6 +38,36 @@ public class GUIClient extends ChatClient {
              (une boite de texte pour entrer un message (sendBox) et un bouton "Envoyer").
            Fiez-vous aux captures d'écran pour voir le résultat attendu.
          */
+        sendBox = new JTextField();
+        sendBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String message = sendBox.getText();
+                send(message);
+                sendBox.setText("");
+            }
+        });
+
+
+        JButton sendButton = new JButton("Envoyer");
+        sendButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String message = sendBox.getText();
+                send(message);
+                chatBox.append(message + "\n");
+                sendBox.setText("");
+            }
+        });
+
+        JPanel sendPanel = new JPanel();
+        sendPanel.setLayout(new BorderLayout());
+        sendPanel.add(sendBox, BorderLayout.CENTER);
+        sendPanel.add(sendButton, BorderLayout.EAST);
+
+        frame.add(sendPanel, BorderLayout.SOUTH);
+
+        frame.setVisible(true);
 
         /* TODO 13: Ajoutez une action au bouton "Envoyer" qui va lui permettre
              a) d'envoyer le message au serveur (appelez la méthode send(String message)),
