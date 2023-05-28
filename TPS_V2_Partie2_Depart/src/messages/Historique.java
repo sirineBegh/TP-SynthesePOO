@@ -45,6 +45,28 @@ public class Historique {
             depuis le fichier passé en paramètre, et de remplir le tableau 'messages' avec les objets
             'Message' créés.
         */
+
+        try (BufferedReader br = new BufferedReader(new FileReader(cheminFichier))) {
+            String ligne;
+            while ((ligne = br.readLine()) != null) {
+                if (ligne.startsWith("Admin:")) {
+                    messages.add(new MessageEntrant(ligne.substring(7)));
+                }else if (ligne.startsWith("@")) {
+                    int indexDeuxPoints = ligne.indexOf(":");
+                    if (indexDeuxPoints != -1 ) {
+                        String destinataire = ligne.substring(1, indexDeuxPoints);
+                        String contenu = ligne.substring(indexDeuxPoints + 1);
+                        messages.add(new MessageEntrantPrive(destinataire, contenu));
+                    }
+                } else {
+                    messages.add(new MessageSortant(ligne));
+                }
+                nbMessagesLus++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         System.out.printf("Lecture de l'historique depuis %s (%d lignes)\n", cheminFichier, nbMessagesLus);
         return nbMessagesLus;
     }
@@ -54,6 +76,16 @@ public class Historique {
         /* TODO 14: Ajoutez le code nécessaire pour permettre d'écrire chaque message (un par ligne)
             dans le fichier passé en paramètre à partir des messages contenus dans le tableau 'messages'.
         */
+        try (FileWriter writer = new FileWriter(cheminFichier)) {
+            for (int i = 0; i < nbMessagesEcrits; i++) {
+                Message message = messages.get(i);
+                writer.write(message.toString());
+                writer.write("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         System.out.printf("Écriture de l'historique terminée dans %s (%d lignes)\n", cheminFichier, nbMessagesEcrits);
         return nbMessagesEcrits;
     }
